@@ -1,0 +1,19 @@
+{% load post_tags %}
+<div class="card" style="">
+    <div class="card-header text-center h4">
+        所有分类
+    </div>
+    <ul class="list-group list-group-flush">
+        {% all_category_tag as all_cates  %}
+        {% for cate in all_cates %}
+            <li class="list-group-item d-flex justify-content-between">
+                <span>
+                    {{ cate.name }}
+                </span>
+                <span>
+                    {{ cate.cate_total }}
+                </span>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

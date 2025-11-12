@@ -1,0 +1,90 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark "
+     style="padding-bottom: 0.1rem; padding-top: 0.1rem; background-color: #3b4348">
+    <div class="container">
+        <a class="navbar-brand" href="#">旅游系统</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'travel:attraction_list' %}">景点</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'travel:tour_package_list' %}">旅行包</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                        旅游攻略
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'article:index' %}">攻略详情</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'article:publish_article' %}">发布攻略</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'article:chart_view' %}">攻略分析</a></li>
+                    </ul>
+                </li>
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                        在线论坛
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'forum:index' %}">论坛首页</a></li>
+                        <li><a class="dropdown-item" href="{% url 'forum:cate_list' %}">模块分类</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'forum:add_post' %}">发布帖子</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+            <div class="d-flex ">
+                <ul class="nav justify-content-center align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'travel:attraction_my_visited' %}">旅游足迹</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'travel:attraction_my_favorite' %}">景点收藏</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'travel:tour_package_my_favorite' %}">旅行包收藏</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'travel:my_order' %}">我的订单</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-bs-toggle="dropdown">
+                                <img src="{{ user.user_profile.avatar.url }}" alt="hello" width="32" height="32"
+                                     class="rounded-circle">
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'user:user_profile_view' %}">个人信息</a></li>
+                                <li><a class="dropdown-item" href="{% url 'user:user_password' %}">重置密码</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="{% url 'user:user_logout' %}">退出系统</a></li>
+                            </ul>
+                        </div>
+                    {% else %}
+                        <div class="d-flex">
+                            <a href="{% url 'user:user_login' %}" class="btn btn-sm btn-success me-2">
+                                登录
+                            </a>
+                            <a href="{% url 'user:user_register' %}" class="btn btn-sm btn-warning">
+                                注册
+                            </a>
+                        </div>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,27 @@
+<div class="row row-cols-1 row-cols-md-4 g-4 mt-2">
+    {% for object in books %}
+        <div class="col">
+            <div class="card">
+                <img src="{{ object.thumbnail.url }}" class="img-responsive card-img-top" height="220px">
+                <div class="card-body">
+                    <h5 class="card-title">{{ object.name }}</h5>
+                    <span class="mt-0 d-block">
+                        作者：{{ object.author }}
+                    </span>
+                    <span class="mt-0 d-block">
+                        出版社：{{ object.publish_house }}
+                    </span>
+                    <span class="mb-2 d-block">
+                        出版时间：{{ object.publish_date }}
+                    </span>
+                    <a href="{% url 'book:book_detail' object.pk %}" class="btn btn-primary">详情</a>
+                    <a data-value="{{ object.pk }}" class="btn btn-warning book_borrow_btn">借阅</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    {% block page_js %}
+
+    {% endblock %}
+
+</div>

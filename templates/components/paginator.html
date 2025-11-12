@@ -1,0 +1,57 @@
+{% if is_paginated %}
+    <nav class="text-center d-flex justify-content-center mt-4">
+        <ul class="pagination">
+
+            {# 上一页 #}
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?{% if query_params %}{{ query_params.urlencode }}&{% endif %}page={{ page_obj.previous_page_number }}">
+                        上一页
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link" href="#">上一页</a></li>
+            {% endif %}
+
+            {# 左侧省略号 + 数字 #}
+            {% if left_more_page %}
+                <li class="page-item"><a class="page-link" href="?{% if query_params %}{{ query_params.urlencode }}&{% endif %}page=1">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">…</a></li>
+            {% endif %}
+
+            {% for lp in left_range %}
+                <li class="page-item"><a class="page-link" href="?{% if query_params %}{{ query_params.urlencode }}&{% endif %}page={{ lp }}">{{ lp }}</a>
+                </li>
+            {% endfor %}
+
+            {# 当前页 #}
+            <li class="page-item active">
+                <a class="page-link" href="?{% if query_params %}{{ query_params.urlencode }}&{% endif %}page={{ page_obj.number }}">{{ page_obj.number }}</a>
+            </li>
+
+            {% for rp in right_range %}
+                <li class="page-item"><a class="page-link" href="?{% if query_params %}{{ query_params.urlencode }}&{% endif %}page={{ rp }}">{{ rp }}</a>
+                </li>
+            {% endfor %}
+
+            {# 右侧省略号 + 尾页 #}
+            {% if right_more_page %}
+                <li class="page-item"><a class="page-link" href="#">…</a></li>
+                <li class="page-item"><a class="page-link" href="?{% if query_params %}{{ query_params.urlencode }}&{% endif %}page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
+                </li>
+            {% endif %}
+
+            {# 下一页 #}
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?{% if query_params %}{{ query_params.urlencode }}&{% endif %}page={{ page_obj.next_page_number }}">
+                        下一页
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link" href="#">下一页</a></li>
+            {% endif %}
+
+        </ul>
+    </nav>
+{% endif %}
